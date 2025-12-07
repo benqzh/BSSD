@@ -4,7 +4,8 @@
 <!-- badges: start -->
 <!-- badges: end -->
 
-The goal of BSSD is to use Baysian smoothing spine method with dependence structure to estimate the trend of a series with seasonal effect.
+The goal of BSSD is to use Baysian smoothing spine method with dependence structure to estimate the trend of a series with seasonal effect. 
+Email: zbq@qlu.edu.cn
 
 ## Installation
 
