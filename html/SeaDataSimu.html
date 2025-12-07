@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Seasonal data simulator</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for SeaDataSimu {BSSD}"><tr><td>SeaDataSimu {BSSD}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Seasonal data simulator
+
+</h2>
+
+<h3>Description</h3>
+
+<p>Simulate data with seasonal effects from sine functions and given trend.
+
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+SeaDataSimu(n.simu=1,TrendSimu,para,RandomS=FALSE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>n.simu</code></td>
+<td>
+<p> Number of series to be simulated
+
+</p>
+</td></tr>
+<tr valign="top"><td><code>TrendSimu</code></td>
+<td>
+<p> A vector of given trend
+</p>
+</td></tr>
+<tr valign="top"><td><code>para</code></td>
+<td>
+<p> A vector of parameters. para=(Ty,s1,s2). Ty is the period of seasonal effect. s1, s2 are variation parameters.
+</p>
+</td></tr>
+<tr valign="top"><td><code>RandomS</code></td>
+<td>
+<p>Logic. If RandomS = FALSE, all n.simu series with share the same seasonal effect. If RandomS = TRUE, the seasonal pattern will be different for each series.
+</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>y_t = m_t + seasonal_t + e_t, e_t ~ N(0,s2^2).
+</p>
+<p>m_t is given by TrendSimu.
+</p>
+<p>seasonal_t = sum_i=1^K A_i*sin(2*pi*i*t/Ty+mu_i),
+where A_i ~ N(0,s1^2), mu_i ~ unif(0,2*pi), K=[Ty/2].
+
+</p>
+
+
+<h3>Value</h3>
+
+<p>A vector or matrix of simulated data. For matrix, the number of rows nrow = n.simu.
+
+
+
+
+
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+DataSim=SeaDataSimu(n.simu=1,rep(0,24),c(6,200,100),RandomS=FALSE)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>BSSD</em> version 0.2.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

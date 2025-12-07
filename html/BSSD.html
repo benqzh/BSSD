@@ -1,0 +1,176 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Baysian smoothing spine with dependency</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for BSSD {BSSD}"><tr><td>BSSD {BSSD}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Baysian smoothing spine with dependency
+
+</h2>
+
+<h3>Description</h3>
+
+<p>This is the main function for the Bayesian Smoothing Spline with Dependency (BSSD) method. This function generates the posterior samples of trend estimater and other parameters.
+
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+BSSD(y,Ty=12,n.s=10^4,c=50,rho.p=1,e2b=1e-10,r=1,k=2,const0=1,uv=FALSE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>y</code></td>
+<td>
+<p>a vector, the observed value (data) at each equally spaced knot
+
+</p>
+</td></tr>
+<tr valign="top"><td><code>Ty</code></td>
+<td>
+<p>period for the seasonal effect of data y,  default is 12 for monthly series
+</p>
+</td></tr>
+<tr valign="top"><td><code>n.s</code></td>
+<td>
+<p>number of posterior samples,  default is 10,000
+</p>
+</td></tr>
+<tr valign="top"><td><code>c</code></td>
+<td>
+<p>hyper-parameter for the Pareto prior of eta
+</p>
+</td></tr>
+<tr valign="top"><td><code>rho.p</code></td>
+<td>
+<p>choice of prior for rho, see <code><a href="rho.logprior.html">rho.logprior</a></code>
+</p>
+</td></tr>
+<tr valign="top"><td><code>e2b</code></td>
+<td>
+<p>small value used for open intervals
+</p>
+</td></tr>
+<tr valign="top"><td><code>r</code></td>
+<td>
+<p>parameter for ratio-of-uniform sampling
+</p>
+</td></tr>
+<tr valign="top"><td><code>k</code></td>
+<td>
+<p>parameter for ratio-of-uniform sampling
+</p>
+</td></tr>
+<tr valign="top"><td><code>const0</code></td>
+<td>
+<p>constant that make sure the the posterior density is not too large to compute in R
+</p>
+</td></tr>
+<tr valign="top"><td><code>uv</code></td>
+<td>
+<p>logic, default is FALSE. If TRUE, the direct results of ratio-of-uniform sampling are reported.
+</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p> The posterior samples are drawn with ratio-of-uniform method
+
+</p>
+
+
+<h3>Value</h3>
+
+<table summary="R valueblock">
+<tr valign="top"><td><code>data</code></td>
+<td>
+<p> the data vector used
+</p>
+</td></tr>
+<tr valign="top"><td><code>z.mc</code></td>
+<td>
+<p> a matrix of posterior samples of trend estimates, ncol=n.s
+</p>
+</td></tr>
+<tr valign="top"><td><code>d0.mc</code></td>
+<td>
+<p> a vector of posterior samples of varience parameter delta_0
+</p>
+</td></tr>
+<tr valign="top"><td><code>eta.mc</code></td>
+<td>
+<p> a vector of posterior samples of smoothing parameter eta
+</p>
+</td></tr>
+<tr valign="top"><td><code>rho.mc</code></td>
+<td>
+<p> a vector of posterior samples of correlation parameter rho
+</p>
+</td></tr>
+<tr valign="top"><td><code>rate.accept</code></td>
+<td>
+<p> the acceptence rate of ratio-of-uniform sampling
+</p>
+</td></tr>
+</table>
+
+
+
+
+
+
+
+<h3>Author(s)</h3>
+
+<p>Benqian Zhang
+
+</p>
+
+
+<h3>See Also</h3>
+
+ <p><code><a href="unemployment.html">unemployment</a></code>, <code><a href="SeaDataSimu.html">SeaDataSimu</a></code>
+
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+#Ex1: U.S. Unemployment level Jan 2004 - Dec 2006
+data(unemployment)
+index=1:36
+y=unemployment$y[index]
+timelab=unemployment$label[index]
+mc.result=BSSD(y=y)
+#Trend estimation
+z.est = apply(mc.result$z.mc, 1, mean)
+#Plot
+plot(index,y,type = 'l', lty=3,xaxt="n",ylab = '',xlab="Time (by 2 months)",ylim = c(min(y),max(y)),las=1)
+lines(index, z.est, type = "l",lty=1,col='red',xlab='')
+at=seq(from = 1, to = length(y), by =2)
+axis(1, at, labels=format(timelab[at],"%Y-%m"))
+#
+#Ex2: Simulated data
+t=1:36
+Trend=9000*exp(-(t-20)^2/2/10^2)+6000
+para=c(12,200,100)
+y=SeaDataSimu(n.simu=1,Trend,para,RandomS=FALSE)
+mc.result=BSSD(y=y)
+#Trend estimation
+z.est = apply(mc.result$z.mc, 1, mean)
+#Plot
+plot(index,y,type = 'l', lty=3,ylab = '',xlab="Time",ylim = c(min(y),max(y)),las=1)
+lines(index, z.est, type = "l",lty=1,col='red',xlab='')
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>BSSD</em> version 0.2.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

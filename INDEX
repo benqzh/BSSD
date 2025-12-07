@@ -1,0 +1,5 @@
+BSSD                    Baysian smoothing spine with dependency
+Corrmatrix              Correlation matrix R
+SeaDataSimu             Seasonal data simulator
+rho.logprior            Prior for rho
+unemployment            Dataset: unemployment level

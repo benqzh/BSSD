@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Dataset: unemployment level</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for unemployment {BSSD}"><tr><td>unemployment {BSSD}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Dataset: unemployment level
+
+</h2>
+
+<h3>Description</h3>
+
+<p>U.S. unemployment level Jan 2004 - Dec 2018
+
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>data("unemployment")</pre>
+
+
+<h3>Format</h3>
+
+<p>A data frame with 180 observations on the following 2 variables.
+</p>
+
+<dl>
+<dt><code>y</code></dt><dd><p>a numeric vector of unemployment level</p>
+</dd>
+<dt><code>label</code></dt><dd><p>a numeric vector of date</p>
+</dd>
+</dl>
+
+
+
+<h3>Examples</h3>
+
+<pre>
+data(unemployment)
+y=unemployment$y
+timelab=unemployment$label
+plot(y,type = 'l', lty=3,xaxt="n",ylab = '',xlab="Time (by 2 months)",ylim = c(min(y),max(y)))
+at=seq(from = 1, to = length(y), by =2)
+axis(1, at, labels=format(timelab[at],"%Y-%m"))
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>BSSD</em> version 0.2.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

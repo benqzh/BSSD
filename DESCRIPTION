@@ -1,0 +1,14 @@
+Package: BSSD
+Type: Package
+Title: Baysian Smoothing Spine with Dependency
+Version: 1.0.0
+Author: Benqian Zhang
+Maintainer: Benqian Zhang <zbq@qlu.edu.cn>
+Description: This package use Baysian smoothing spine method with dependence structure to estimate the trend of a series with seasonal effect.
+Depends: R (>= 3.5.0)
+License: GPL(>=2)
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 7.1.1
+Built: R 4.0.0; ; 2025-11-20 20:46:38 UTC; windows
+URL: https://github.com/benqzh
